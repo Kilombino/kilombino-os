@@ -46,9 +46,9 @@ sleep 3
 echo "  Ollama instalado: $(ollama --version)"
 
 # --- Gemma 3 4B ---
-echo -e "${ORANGE}[4/7] Descargando modelo Gemma 3 4B (~3 GB)...${NC}"
-ollama pull gemma3:4b
-echo "  Gemma 3 4B descargado"
+echo -e "${ORANGE}[4/7] Descargando modelo Gemma 3 12B (~7 GB)...${NC}"
+ollama pull gemma3:12b
+echo "  Gemma 3 12B descargado"
 
 # --- Bot de Telegram ---
 echo -e "${ORANGE}[5/7] Instalando bot de Telegram...${NC}"
@@ -85,7 +85,7 @@ if (!fs.existsSync(CONFIG_FILE)) {
 const config = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8'));
 const BOT_TOKEN = config.bot_token;
 const ALLOWED_USERS = config.allowed_users || []; // chat_ids allowed to use the bot
-const MODEL = config.model || 'gemma3:4b';
+const MODEL = config.model || 'gemma3:12b';
 const OLLAMA_URL = config.ollama_url || 'http://localhost:11434';
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
@@ -246,7 +246,7 @@ case "$1" in
 {
   "bot_token": "$TOKEN",
   "allowed_users": [$CHATID],
-  "model": "gemma3:4b",
+  "model": "gemma3:12b",
   "ollama_url": "http://localhost:11434"
 }
 CONF
