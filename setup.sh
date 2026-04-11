@@ -46,9 +46,9 @@ sleep 3
 echo "  Ollama instalado: $(ollama --version)"
 
 # --- Gemma 3 4B ---
-echo -e "${ORANGE}[4/7] Descargando modelo Gemma 3 12B (~7 GB)...${NC}"
-ollama pull gemma3:12b
-echo "  Gemma 3 12B descargado"
+echo -e "${ORANGE}[4/7] Descargando modelo Gemma 4 e4b (~9.6 GB)...${NC}"
+ollama pull gemma4:e4b
+echo "  Gemma 4 e4b descargado"
 
 # --- Bot de Telegram ---
 echo -e "${ORANGE}[5/7] Instalando bot de Telegram...${NC}"
@@ -85,7 +85,7 @@ if (!fs.existsSync(CONFIG_FILE)) {
 const config = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8'));
 const BOT_TOKEN = config.bot_token;
 const ALLOWED_USERS = config.allowed_users || []; // chat_ids allowed to use the bot
-const MODEL = config.model || 'gemma3:12b';
+const MODEL = config.model || 'gemma4:e4b';
 const OLLAMA_URL = config.ollama_url || 'http://localhost:11434';
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
@@ -246,7 +246,7 @@ case "$1" in
 {
   "bot_token": "$TOKEN",
   "allowed_users": [$CHATID],
-  "model": "gemma3:12b",
+  "model": "gemma4:e4b",
   "ollama_url": "http://localhost:11434"
 }
 CONF
@@ -328,7 +328,7 @@ sudo tee /etc/motd > /dev/null << 'MOTD'
  | ' <| | / _ \ '  \ | '_ \ | ' \/ _ \  | (_) \__ \
  |_|\_\_|_\___/_|_|_||_.__/_|_||_\___/   \___/|___/
 
- Bitcoin · Gemma 3 · Soberania Digital
+ Bitcoin · Gemma 4 · Soberania Digital
 
  Comandos:
    kilombino-os status          — Ver estado
