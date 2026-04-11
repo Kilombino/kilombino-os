@@ -1,7 +1,7 @@
 #!/bin/bash
 # =============================================================================
 # Kilombino OS — Setup Script
-# Installs Ollama + Gemma 3 + Telegram Bot on Ubuntu Server 24.04
+# Installs Ollama + Gemma 4 + Telegram Bot on Ubuntu Server 24.04
 # Usage: curl -sL https://raw.githubusercontent.com/Kilombino/kilombino-os/main/setup.sh | bash
 # =============================================================================
 
@@ -18,7 +18,7 @@ echo " | |/ (_) |___ _ __  | |__(_)_ _  ___    / _ \\/ __|"
 echo " | ' <| | / _ \\ '  \\ | '_ \\ | ' \\/ _ \\  | (_) \\__ \\"
 echo " |_|\\_\\_|_\\___/_|_|_||_.__/_|_||_\\___/   \\___/|___/"
 echo -e "${NC}"
-echo -e "${GREEN}Instalando Ollama + Gemma 3 + Telegram Bot...${NC}"
+echo -e "${GREEN}Instalando Ollama + Gemma 4 + Telegram Bot...${NC}"
 echo ""
 
 # --- System update ---
@@ -45,7 +45,7 @@ sudo systemctl start ollama
 sleep 3
 echo "  Ollama instalado: $(ollama --version)"
 
-# --- Gemma 3 4B ---
+# --- Gemma 4 e4b ---
 echo -e "${ORANGE}[4/7] Descargando modelo Gemma 4 e4b (~9.6 GB)...${NC}"
 ollama pull gemma4:e4b
 echo "  Gemma 4 e4b descargado"
