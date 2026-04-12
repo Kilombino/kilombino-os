@@ -1,17 +1,22 @@
 # Kilombino OS
 
-**Bitcoin · Gemma 4 · Soberanía Digital**
+**Bitcoin · Gemma 4 · Claude Code · Soberanía Digital**
 
-Script de instalación que convierte cualquier mini PC x86 con Ubuntu Server 24.04 en un asistente IA local accesible por Telegram.
+Script de instalación que convierte cualquier mini PC x86 con Ubuntu Server en un asistente IA local con Claude Code, accesible por Telegram.
 
 ## Qué incluye
 
+- **Claude Code** — el CLI de Anthropic con todas sus herramientas (Read, Write, Edit, Bash, etc.)
 - **Ollama** — servidor de modelos IA local
 - **Gemma 4 e4b** — modelo de Google, gratuito y open source (4.5B params, 128K contexto, multimodal)
-- **Bot de Telegram** — habla con tu IA desde el móvil
-- **Ejecución de comandos** — el bot puede ejecutar comandos en el sistema
-- **Autoarranque** — todo levanta solo al encender
-- **Persistencia** — historial de conversaciones guardado en local
+- **Plugin Telegram** — habla con Claude Code desde el móvil, exactamente como hablar con Claude
+- **Ejecución de comandos** — Claude Code ejecuta comandos en el sistema con permisos completos
+- **Autoarranque** — todo levanta solo al encender (tmux + crontab @reboot)
+- **100% local** — el modelo corre en tu hardware, nada en la nube, coste cero
+
+## Cómo funciona
+
+Claude Code se conecta a Ollama (que sirve Gemma 4 localmente) en vez de a la API de Anthropic. Así tienes todas las herramientas y capacidades de Claude Code pero alimentadas por un modelo gratuito y soberano.
 
 ## Instalación
 
@@ -29,12 +34,12 @@ Script de instalación que convierte cualquier mini PC x86 con Ubuntu Server 24.
 curl -sL https://raw.githubusercontent.com/Kilombino/kilombino-os/main/setup.sh | bash
 ```
 
-Esto instala automáticamente (~15-20 min según velocidad de internet):
-- Node.js LTS
-- Ollama
-- Gemma 4 e4b (~9.6 GB de descarga)
-- Bot de Telegram
-- Servicios de autoarranque
+Instala automáticamente (~20 min):
+- Node.js LTS + Claude Code
+- Plugin Telegram para Claude Code
+- Ollama + Gemma 4 e4b (~9.6 GB)
+- Autoarranque con tmux + crontab
+- Sudo sin password
 - Branding Kilombino OS
 
 ### Paso 3 — Configurar Telegram
@@ -43,29 +48,20 @@ Esto instala automáticamente (~15-20 min según velocidad de internet):
 kilombino-os setup-telegram
 ```
 
-El script te guiará:
 1. Abre Telegram → habla con [@BotFather](https://t.me/BotFather)
 2. Escribe `/newbot` → ponle nombre → copia el **token**
-3. Abre tu nuevo bot en Telegram y escríbele `/start`
-4. El bot te dirá tu **chat_id**
-5. Pega token y chat_id cuando el script te lo pida
-6. ¡Listo! Ya puedes hablar con tu IA por Telegram
+3. Pega el token cuando el script te lo pida
+4. Abre tu bot y escríbele algo
+5. Aprueba el acceso: `kilombino-os approve-telegram`
 
-## Uso
-
-Escribe a tu bot de Telegram y responderá usando Gemma 4 local:
-
-- **Preguntas normales** → responde con IA
-- **Pedir ejecutar comandos** → ejecuta en el sistema y devuelve el resultado
-- `/clear` → borra historial de conversación
-- `/start` → muestra info del bot
-
-## Comandos de administración
+## Comandos
 
 ```bash
-kilombino-os status          # Ver estado del sistema (ollama, bot, disco, RAM)
-kilombino-os setup-telegram  # Configurar o reconfigurar el bot
-kilombino-os add-user        # Autorizar a otro usuario (chat_id)
+kilombino-os setup-telegram    # Configurar bot de Telegram
+kilombino-os approve-telegram  # Aprobar acceso Telegram
+kilombino-os attach            # Ver consola de Claude Code en directo
+kilombino-os restart           # Reiniciar Claude Code
+kilombino-os status            # Ver estado del sistema
 ```
 
 ## Requisitos
@@ -74,16 +70,18 @@ kilombino-os add-user        # Autorizar a otro usuario (chat_id)
 |-----------|--------|-------------|
 | CPU | x86_64 dual-core | Intel i5 / AMD Ryzen 5 |
 | RAM | 8 GB | 16 GB |
-| Disco | 20 GB libres | 40 GB SSD |
-| Internet | Necesario para instalación | Necesario para Telegram |
+| Disco | 25 GB libres | 50 GB SSD |
+| Internet | Para instalación + Telegram | — |
 | SO | Ubuntu Server 24.04 LTS | — |
 
-## Seguridad
+## Arquitectura
 
-- Solo los chat_ids autorizados pueden hablar con el bot
-- Los no autorizados reciben su chat_id para que el admin los añada
-- Todo corre local — el modelo no envía datos a ningún servidor externo
-- El historial de conversaciones se guarda solo en el mini PC
+```
+Telegram → Plugin Telegram → Claude Code → Ollama → Gemma 4 (local)
+                                  ↓
+                          Read / Write / Edit / Bash
+                          (herramientas del sistema)
+```
 
 ## Licencia
 
