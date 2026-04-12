@@ -1,6 +1,6 @@
 # Kilombino OS
 
-**Bitcoin · Gemma 4 · Claude Code · Soberanía Digital**
+**Gemma 4 · Claude Code · Soberanía Digital**
 
 Script de instalación que convierte cualquier mini PC x86 con Ubuntu Server en un asistente IA local con Claude Code, accesible por Telegram.
 
@@ -23,7 +23,7 @@ Claude Code se conecta a Ollama (que sirve Gemma 4 localmente) en vez de a la AP
 ### Paso 1 — Instalar Ubuntu Server 24.04
 
 1. Descarga la ISO de [ubuntu.com/download/server](https://ubuntu.com/download/server)
-2. Grábala en un USB con [Balena Etcher](https://etcher.balena.io/)
+2. Grábala en un USB con [Rufus](https://rufus.ie/)
 3. Arranca el mini PC desde el USB
 4. Sigue el instalador: idioma → teclado → usuario/contraseña → instalar
 5. Reinicia y entra con tu usuario
