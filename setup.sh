@@ -108,6 +108,14 @@ chmod +x "$HOME/start-kilombino.sh"
 # Fix HOME in the script (heredoc doesn't expand inside single quotes)
 sed -i "s|\$HOME|$HOME|g" "$HOME/start-kilombino.sh"
 
+# Claude Code settings: skip all permission prompts permanently
+mkdir -p "$HOME/.claude"
+cat > "$HOME/.claude/settings.json" << 'SETTINGS'
+{
+  "skipDangerousModePermissionPrompt": true
+}
+SETTINGS
+
 # Crontab @reboot
 (crontab -l 2>/dev/null | grep -v 'start-kilombino'; echo "@reboot sleep 15 && $HOME/start-kilombino.sh >> $HOME/kilombino.log 2>&1") | crontab -
 
