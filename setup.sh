@@ -202,7 +202,7 @@ sudo tee /etc/motd > /dev/null << 'MOTD'
  | ' <| | / _ \ '  \ | '_ \ | ' \/ _ \  | (_) \__ \
  |_|\_\_|_\___/_|_|_||_.__/_|_||_\___/   \___/|___/
 
- Bitcoin · Gemma 4 · Claude Code · Soberania Digital
+ Gemma 4 · Claude Code · Soberania Digital
 
  Comandos:
    kilombino-os setup-telegram    — Configurar Telegram
