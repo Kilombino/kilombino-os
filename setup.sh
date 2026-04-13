@@ -76,6 +76,13 @@ export PATH="/usr/local/bin:/usr/bin:/bin:$HOME/.npm-global/bin"
 export HOME="$HOME"
 export TMUX_TMPDIR="/tmp"
 
+# Fix tmux permissions (prevents "unsafe permissions" error)
+TMUX_DIR="/tmp/tmux-$(id -u)"
+if [ -d "$TMUX_DIR" ] && [ "$(stat -c '%U' "$TMUX_DIR" 2>/dev/null)" != "$(whoami)" ]; then
+  rm -rf "$TMUX_DIR"
+fi
+mkdir -p "$TMUX_DIR" && chmod 700 "$TMUX_DIR"
+
 # Ollama env — Claude Code usará Ollama como backend
 export ANTHROPIC_BASE_URL=http://localhost:11434
 export ANTHROPIC_AUTH_TOKEN=ollama
